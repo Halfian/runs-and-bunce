@@ -21,11 +21,11 @@ export default function Callback() {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                client_id: 243950,
-                client_secret: "f8d491c9280a733089e210513e6f9ebf325aa808",
+                client_id: import.meta.env.VITE_STRAVA_CLIENT_ID,
+                client_secret: import.meta.env.VITE_STRAVA_CLIENT_SECRET,
                 code,
                 grant_type: "authorization_code",
-                redirect_uri: "http://localhost:5173/callback",
+                redirect_uri: import.meta.env.VITE_STRAVA_REDIRECT_URI,
                 }),
             })
             .then((res) => res.json())
