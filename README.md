@@ -15,32 +15,39 @@ A futuristic dashboard to prepare for the **Kuala Lumpur Standard Chartered (KLS
 
 ## Tech Stack
 
-- [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+- [React](https://react.dev/) + [Vite](https://vitejs.dev/) (Optimized for lightning-fast HMR and build times)
 - [TailwindCSS](https://tailwindcss.com/)
 - [Chart.js](https://www.chartjs.org/) via [react-chartjs-2](https://react-chartjs-2.js.org/)
-- [Strava API](https://developers.strava.com/)
+- [Strava API](https://developers.strava.com/) (RESTful data fetching & authentication)
 
 ---
 
 ## Setup
 
-Clone the repo and install dependencies:
+Clone the repository and install dependencies:
 
 ```bash
+git clone https://github.com/Halfian/runs-and-bunce
+cd runs-and-bunce
 npm install
-npm run dev
 ```
 
-Create a .env file in th eproject root:
+Create a .env file in the project root directory and populate it with your Strava API developer credentials:
 
 - VITE_STRAVA_CLIENT_ID=your_client_id
 - VITE_STRAVA_CLIENT_SECRET=your_client_secret
 - VITE_STRAVA_REDIRECT_URI=http://localhost:5173/callback
 - VITE_STRAVA_SCOPE=activity:read
 
+Start the local development server:
+
+```bash
+npm run dev
+```
+
 ---
 
-## ScreenShots
+## Screenshots
 
 ### Countdown & Today's Stats
 
@@ -56,7 +63,7 @@ Create a .env file in th eproject root:
 
 ---
 
-## Roadmap
+## Roadmap & Future Enhancements
 
 - Auto-mark TrainingPlan days as completed when Strava run detected.
 - Pie chart visualization for budget categories.
