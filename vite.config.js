@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
   ],
-  base: process.env.NODE_ENV === 'production'
-  ? '/runs-and-bunce/'
-  : '/',
+  base: process.env.DEPLOY_ENV === 'vercel'
+  ? '/' // Vercel serves the app from the root path asset/ path
+  : '/runs-and-bunce/', // GitHub Pages serves the app from the /runs-and-bunce/ path
 });
