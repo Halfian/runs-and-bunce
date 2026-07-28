@@ -35,7 +35,7 @@ export default function WeeklyCharts() {
     const REDIRECT_URI = import.meta.env.VITE_STRAVA_REDIRECT_URI;
     const SCOPE = import.meta.env.VITE_STRAVA_SCOPE;
     const AUTH_URL = `https://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&scope=${SCOPE}`;
-
+    console.log("Auth URL:", AUTH_URL)
 
     // Group runs by week
     const weeklyData = {};

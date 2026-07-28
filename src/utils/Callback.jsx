@@ -24,12 +24,12 @@ export default function Callback() {
                 client_id: import.meta.env.VITE_STRAVA_CLIENT_ID,
                 client_secret: import.meta.env.VITE_STRAVA_CLIENT_SECRET,
                 code,
-                grant_type: "authorization_code",
-                redirect_uri: import.meta.env.VITE_STRAVA_REDIRECT_URI,
+                grant_type: "authorization_code"
                 }),
             })
             .then((res) => res.json())
             .then((data) => {
+                console.log("Token response:", data);
                 if (!data.access_token) {
                     setStatus("Failed to get token");
                     return;
@@ -48,6 +48,7 @@ export default function Callback() {
             })
             .then((res) => res?.json())
             .then((acts) => {
+                console.log("Activities response:", acts);
                 if (Array.isArray(acts)) {
                     const runs = acts
                         .filter(a => a.type === "Run")
