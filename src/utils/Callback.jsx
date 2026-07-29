@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRunStorage } from '../hooks/useRunStorage';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,8 +6,11 @@ export default function Callback() {
     const { addRunBatch } = useRunStorage();
     const [status, setStatus] = useState("Connecting to Strava...");
     const navigate = useNavigate();
+    const initialized = useRef(false);
 
     useEffect(() => {
+        if (initialized.current) return;
+
         const params = new URLSearchParams(window.location.search);
         const code = params.get("code");
 
@@ -15,7 +18,9 @@ export default function Callback() {
             setStatus("No code found in URL");
             return; 
         }
-
+        
+        initialized.current = true;
+        
         // Exchange code for access token
         fetch("https://www.strava.com/oauth/token", {
             method: "POST",
@@ -31,9 +36,11 @@ export default function Callback() {
             .then((data) => {
                 console.log("Token response:", data);
                 if (!data.access_token) {
-                    setStatus("Failed to get token");
+                    setStatus("Failed to get token " + data.message);
+                    console.error("Strava error:" + data.errors);
                     return;
                 }
+                
                 setStatus("Fetching activities...");
 
                 // Fetch activities
@@ -65,7 +72,7 @@ export default function Callback() {
                 // Redirect back to dashboard after 1s
                 setTimeout(() => navigate("/"), 1000);
                 } else {
-                    setStatus("Failed loading activities");
+                    setStatus("Failed loading activities: " + acts?.message);
                 }
             })
             .catch((err) => setStatus("Error: " + err.message));
